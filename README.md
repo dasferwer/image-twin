@@ -1,5 +1,7 @@
 # 15. ImageTwin
 
+[![CI](https://github.com/dasferwer/image-twin/actions/workflows/ci.yml/badge.svg)](https://github.com/dasferwer/image-twin/actions)
+
 **Поиск повторно загруженных изображений, включая сжатие, уменьшение,
 обрезку и водяные знаки.** Проект уровня Middle+ Backend + Computer Vision.
 

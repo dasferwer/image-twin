@@ -24,4 +24,4 @@
 оценкой качества на произвольном каталоге.
 
 Подробности: [verification.json](verification.json), [evaluation.json](evaluation.json).
-Повторение: [runbook.md](runbook.md). GitHub Actions подготовлен; проект пока локальный.
+Повторение: [runbook.md](runbook.md). GitHub Actions повторяет проверки; [актуальный статус](https://github.com/dasferwer/image-twin/actions).
