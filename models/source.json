@@ -1,0 +1,8 @@
+{
+  "name": "mobilenetv2-7.onnx",
+  "source_url": "https://media.githubusercontent.com/media/onnx/models/4f43949841cb55a0b98dc8fcd045431ccafd9f96/validated/vision/classification/mobilenet/model/mobilenetv2-7.onnx",
+  "revision": "4f43949841cb55a0b98dc8fcd045431ccafd9f96",
+  "sha256": "c1c513582d56afceff8516c73804e484c81c6a830712ab6d682253f4a3cd042f",
+  "source": "ONNX Model Zoo, MobileNet v2-7 pretrained on ImageNet",
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,158 @@
+name: 15-image-twin
+
+x-app: &app
+  build:
+    context: .
+    target: runtime
+  environment: &environment
+    DATABASE_URL: postgresql+asyncpg://imagetwin:imagetwin@database:5432/imagetwin
+    AMQP_URL: amqp://imagetwin:imagetwin@rabbitmq:5672/
+    JWT_SECRET: ${JWT_SECRET:-local-demo-imagetwin-replace-before-deployment}
+    LEASE_SECONDS: ${LEASE_SECONDS:-20}
+    INFERENCE_DELAY_SECONDS: ${INFERENCE_DELAY_SECONDS:-0}
+    MODEL_DIR: /app/models
+    S3_ENDPOINT: http://storage:9000
+    S3_BUCKET: imagetwin-images
+  restart: unless-stopped
+  init: true
+
+services:
+  database:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: imagetwin
+      POSTGRES_USER: imagetwin
+      POSTGRES_PASSWORD: imagetwin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U imagetwin -d imagetwin"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: imagetwin
+      RABBITMQ_DEFAULT_PASS: imagetwin
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+  storage:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    command: ["server", "/data"]
+    environment:
+      MINIO_ROOT_USER: imagetwin
+      MINIO_ROOT_PASSWORD: imagetwin-local-demo
+    volumes:
+      - images_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    restart: unless-stopped
+  test-storage:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    profiles: ["test"]
+    command: ["server", "/data"]
+    environment:
+      MINIO_ROOT_USER: imagetwin
+      MINIO_ROOT_PASSWORD: imagetwin-local-demo
+    tmpfs:
+      - /data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  migrate:
+    <<: *app
+    command: ["sh", "-c", "alembic upgrade head && python scripts/seed.py"]
+    depends_on:
+      database:
+        condition: service_healthy
+      storage:
+        condition: service_healthy
+    restart: "no"
+  api:
+    <<: *app
+    ports:
+      - "127.0.0.1:8150:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  dispatcher:
+    <<: *app
+    command: ["python", "-m", "imagetwin.dispatcher"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "scripts/worker_health.py", "dispatcher"]
+      interval: 5s
+      timeout: 5s
+      retries: 6
+  worker:
+    <<: *app
+    command: ["python", "-m", "imagetwin.worker"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "scripts/worker_health.py", "indexer"]
+      interval: 5s
+      timeout: 5s
+      retries: 6
+  test-db:
+    image: pgvector/pgvector:pg17
+    profiles: ["test"]
+    environment:
+      POSTGRES_DB: imagetwin_test
+      POSTGRES_USER: imagetwin
+      POSTGRES_PASSWORD: imagetwin
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U imagetwin -d imagetwin_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  test:
+    build:
+      context: .
+      target: test
+    profiles: ["test"]
+    environment:
+      <<: *environment
+      DATABASE_URL: postgresql+asyncpg://imagetwin:imagetwin@test-db:5432/imagetwin_test
+      TESTING: "true"
+      S3_ENDPOINT: http://test-storage:9000
+      S3_BUCKET: imagetwin-test
+    depends_on:
+      test-db:
+        condition: service_healthy
+      test-storage:
+        condition: service_healthy
+    init: true
+
+volumes:
+  images_data:
+  postgres_data:
+  rabbitmq_data:

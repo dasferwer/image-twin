@@ -1,0 +1,58 @@
+[
+  {
+    "file": "camera.png",
+    "author": "Lav Varshney",
+    "license": "CC0",
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.camera",
+    "sha256": "fe10d880ba2653ffab56ce84355c6161a98deb9bda56417f60eb1879ac6f6753"
+  },
+  {
+    "file": "coffee.png",
+    "author": "Rachel Michetti",
+    "license": "CC0",
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.coffee",
+    "sha256": "bc7c679e93a04b35aef5c5d644f0293d6aac8df7ccbba06f1d5bdddc0285050b"
+  },
+  {
+    "file": "chelsea.png",
+    "author": "Stefan van der Walt",
+    "license": "CC0",
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.chelsea",
+    "sha256": "adbb6c59da5251983dfca65bd3d055e3d2cb9d49f85af5d473852a9033e42f24"
+  },
+  {
+    "file": "eagle.png",
+    "author": "Dayane Machado",
+    "license": "CC0",
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.eagle",
+    "sha256": "241a2363fe224a2ca2e10bcc258847e35f2cffe1ad41b7e131e3d98653c2f896"
+  },
+  {
+    "file": "horse.png",
+    "author": "Andreas Preuss",
+    "license": "CC0",
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.horse",
+    "sha256": "537095f128f0781a747b8e866248defc611286a4e51418fed0ac624438183c85"
+  },
+  {
+    "file": "human_mitosis.png",
+    "author": "David Root",
+    "license": "CC0",
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.human_mitosis",
+    "sha256": "af9c9178c0d84218dae2311bda584c67c0e4788e7f40cec9653798d016557886"
+  },
+  {
+    "file": "microaneurysms.png",
+    "author": "Andreas Maier",
+    "license": "CC0",
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.microaneurysms",
+    "sha256": "7feeed32f97eb4d0d32482193657a73501937ee7a4c4e1ef132516ed6fd06027"
+  },
+  {
+    "file": "astronaut.png",
+    "author": "NASA",
+    "license": "NASA public domain",
+    "source": "https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.astronaut",
+    "sha256": "48d3711f1f40fbbd45b2e3720cf1c084b3b873e02bf292da08a312ca67cf2939"
+  }
+]

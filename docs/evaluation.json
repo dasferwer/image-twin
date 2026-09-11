@@ -1,0 +1,422 @@
+{
+  "encoder_version": "mobilenet-v2-c1c513582d56",
+  "thresholds": {
+    "phash_max_distance": 8,
+    "minimum_cosine": 0.92,
+    "minimum_inliers": 12,
+    "minimum_inlier_ratio": 0.5,
+    "minimum_matched_area": 0.06
+  },
+  "scope": "8 public reference images; transformed copies, not a marketplace production benchmark",
+  "splits": {
+    "calibration": {
+      "source_images": [
+        "camera",
+        "coffee",
+        "horse",
+        "microaneurysms"
+      ],
+      "metrics": {
+        "phash_only": {
+          "true_positives": 10,
+          "false_negatives": 6,
+          "false_positives": 0,
+          "true_negatives": 48,
+          "recall": 0.625,
+          "precision": 1.0
+        },
+        "combined": {
+          "true_positives": 12,
+          "false_negatives": 4,
+          "false_positives": 0,
+          "true_negatives": 48,
+          "recall": 0.75,
+          "precision": 1.0
+        }
+      },
+      "positive_pairs": [
+        {
+          "source": "camera",
+          "transformation": "jpeg",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9914986043143459,
+          "geometric_inliers": 499,
+          "inlier_ratio": 1.0,
+          "matched_area": 0.3131578647164414
+        },
+        {
+          "source": "camera",
+          "transformation": "resize",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.983544834596111,
+          "geometric_inliers": 158,
+          "inlier_ratio": 0.9813664596273292,
+          "matched_area": 0.1275675338311587
+        },
+        {
+          "source": "camera",
+          "transformation": "crop",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 20,
+          "cosine_similarity": 0.9615142150313017,
+          "geometric_inliers": 451,
+          "inlier_ratio": 0.9977876106194691,
+          "matched_area": 0.13890423799274232
+        },
+        {
+          "source": "camera",
+          "transformation": "watermark",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 14,
+          "cosine_similarity": 0.9663467776295989,
+          "geometric_inliers": 354,
+          "inlier_ratio": 1.0,
+          "matched_area": 0.2221419167886034
+        },
+        {
+          "source": "coffee",
+          "transformation": "jpeg",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.980951888207354,
+          "geometric_inliers": 487,
+          "inlier_ratio": 1.0,
+          "matched_area": 0.4562881886076421
+        },
+        {
+          "source": "coffee",
+          "transformation": "resize",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9798517716282904,
+          "geometric_inliers": 160,
+          "inlier_ratio": 0.935672514619883,
+          "matched_area": 0.3452279087389598
+        },
+        {
+          "source": "coffee",
+          "transformation": "crop",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 18,
+          "cosine_similarity": 0.9663385264265876,
+          "geometric_inliers": 339,
+          "inlier_ratio": 0.9941348973607038,
+          "matched_area": 0.2180065169206139
+        },
+        {
+          "source": "coffee",
+          "transformation": "watermark",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 8,
+          "cosine_similarity": 0.9411909760330129,
+          "geometric_inliers": 104,
+          "inlier_ratio": 0.9719626168224299,
+          "matched_area": 0.3566789843399305
+        },
+        {
+          "source": "horse",
+          "transformation": "jpeg",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9905405627442352,
+          "geometric_inliers": 80,
+          "inlier_ratio": 0.9302325581395349,
+          "matched_area": 0.37410512854130795
+        },
+        {
+          "source": "horse",
+          "transformation": "resize",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9633006865530468,
+          "geometric_inliers": 18,
+          "inlier_ratio": 0.9,
+          "matched_area": 0.2466382721786925
+        },
+        {
+          "source": "horse",
+          "transformation": "crop",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 16,
+          "cosine_similarity": 0.9180369624073494,
+          "geometric_inliers": 52,
+          "inlier_ratio": 0.9629629629629629,
+          "matched_area": 0.18140489263999715
+        },
+        {
+          "source": "horse",
+          "transformation": "watermark",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 6,
+          "cosine_similarity": 0.9667337117608821,
+          "geometric_inliers": 42,
+          "inlier_ratio": 0.75,
+          "matched_area": 0.3051152006701452
+        },
+        {
+          "source": "microaneurysms",
+          "transformation": "jpeg",
+          "duplicate": false,
+          "reason": "insufficient_evidence",
+          "phash_distance": 2,
+          "cosine_similarity": 0.8317312664983131,
+          "geometric_inliers": 0,
+          "inlier_ratio": 0.0,
+          "matched_area": 0.0
+        },
+        {
+          "source": "microaneurysms",
+          "transformation": "resize",
+          "duplicate": false,
+          "reason": "insufficient_evidence",
+          "phash_distance": 2,
+          "cosine_similarity": 0.8766862763225441,
+          "geometric_inliers": 0,
+          "inlier_ratio": 0.0,
+          "matched_area": 0.0
+        },
+        {
+          "source": "microaneurysms",
+          "transformation": "crop",
+          "duplicate": false,
+          "reason": "insufficient_evidence",
+          "phash_distance": 28,
+          "cosine_similarity": 0.8666083771145863,
+          "geometric_inliers": 0,
+          "inlier_ratio": 0.0,
+          "matched_area": 0.0
+        },
+        {
+          "source": "microaneurysms",
+          "transformation": "watermark",
+          "duplicate": false,
+          "reason": "insufficient_evidence",
+          "phash_distance": 18,
+          "cosine_similarity": 0.811692161406449,
+          "geometric_inliers": 0,
+          "inlier_ratio": 0.0,
+          "matched_area": 0.0
+        }
+      ]
+    },
+    "evaluation": {
+      "source_images": [
+        "chelsea",
+        "eagle",
+        "human_mitosis",
+        "astronaut"
+      ],
+      "metrics": {
+        "phash_only": {
+          "true_positives": 10,
+          "false_negatives": 6,
+          "false_positives": 0,
+          "true_negatives": 48,
+          "recall": 0.625,
+          "precision": 1.0
+        },
+        "combined": {
+          "true_positives": 16,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "true_negatives": 48,
+          "recall": 1.0,
+          "precision": 1.0
+        }
+      },
+      "positive_pairs": [
+        {
+          "source": "chelsea",
+          "transformation": "jpeg",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9870787368882681,
+          "geometric_inliers": 402,
+          "inlier_ratio": 0.9975186104218362,
+          "matched_area": 0.3764730327117211
+        },
+        {
+          "source": "chelsea",
+          "transformation": "resize",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9837663689973271,
+          "geometric_inliers": 122,
+          "inlier_ratio": 0.9682539682539683,
+          "matched_area": 0.28984366149582597
+        },
+        {
+          "source": "chelsea",
+          "transformation": "crop",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 22,
+          "cosine_similarity": 0.9572828430383804,
+          "geometric_inliers": 208,
+          "inlier_ratio": 1.0,
+          "matched_area": 0.22349106740220526
+        },
+        {
+          "source": "chelsea",
+          "transformation": "watermark",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 8,
+          "cosine_similarity": 0.9243247318186982,
+          "geometric_inliers": 162,
+          "inlier_ratio": 0.9818181818181818,
+          "matched_area": 0.2229897378623626
+        },
+        {
+          "source": "eagle",
+          "transformation": "jpeg",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9952902856196579,
+          "geometric_inliers": 472,
+          "inlier_ratio": 0.9915966386554622,
+          "matched_area": 0.5465512129727291
+        },
+        {
+          "source": "eagle",
+          "transformation": "resize",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.985319016318257,
+          "geometric_inliers": 160,
+          "inlier_ratio": 0.9937888198757764,
+          "matched_area": 0.429321392029248
+        },
+        {
+          "source": "eagle",
+          "transformation": "crop",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 24,
+          "cosine_similarity": 0.9467087889151425,
+          "geometric_inliers": 211,
+          "inlier_ratio": 1.0,
+          "matched_area": 0.26305757476030034
+        },
+        {
+          "source": "eagle",
+          "transformation": "watermark",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 6,
+          "cosine_similarity": 0.9132233419326109,
+          "geometric_inliers": 147,
+          "inlier_ratio": 1.0,
+          "matched_area": 0.4699894296621584
+        },
+        {
+          "source": "human_mitosis",
+          "transformation": "jpeg",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 2,
+          "cosine_similarity": 0.9853733185042626,
+          "geometric_inliers": 391,
+          "inlier_ratio": 0.9974489795918368,
+          "matched_area": 0.6329291194838266
+        },
+        {
+          "source": "human_mitosis",
+          "transformation": "resize",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9756627594730717,
+          "geometric_inliers": 110,
+          "inlier_ratio": 0.990990990990991,
+          "matched_area": 0.3820340191160362
+        },
+        {
+          "source": "human_mitosis",
+          "transformation": "crop",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 20,
+          "cosine_similarity": 0.957562421301183,
+          "geometric_inliers": 240,
+          "inlier_ratio": 0.9917355371900827,
+          "matched_area": 0.24975056563784603
+        },
+        {
+          "source": "human_mitosis",
+          "transformation": "watermark",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 20,
+          "cosine_similarity": 0.8286435305789651,
+          "geometric_inliers": 196,
+          "inlier_ratio": 1.0,
+          "matched_area": 0.6149714084240259
+        },
+        {
+          "source": "astronaut",
+          "transformation": "jpeg",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9925461877291881,
+          "geometric_inliers": 506,
+          "inlier_ratio": 1.0,
+          "matched_area": 0.4390831036059367
+        },
+        {
+          "source": "astronaut",
+          "transformation": "resize",
+          "duplicate": true,
+          "reason": "hash_and_embedding",
+          "phash_distance": 0,
+          "cosine_similarity": 0.9810497111804095,
+          "geometric_inliers": 161,
+          "inlier_ratio": 0.9415204678362573,
+          "matched_area": 0.34827408246333225
+        },
+        {
+          "source": "astronaut",
+          "transformation": "crop",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 26,
+          "cosine_similarity": 0.9281124975373675,
+          "geometric_inliers": 355,
+          "inlier_ratio": 0.9971910112359551,
+          "matched_area": 0.255620159554645
+        },
+        {
+          "source": "astronaut",
+          "transformation": "watermark",
+          "duplicate": true,
+          "reason": "geometric_match",
+          "phash_distance": 10,
+          "cosine_similarity": 0.9480059627593631,
+          "geometric_inliers": 223,
+          "inlier_ratio": 0.9911111111111112,
+          "matched_area": 0.4150175473779584
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 1.34
+}

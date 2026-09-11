@@ -1,0 +1,40 @@
+{
+  "verified_at": "2026-09-11T07:29:38.779905+00:00",
+  "project": "imagetwin",
+  "integration_tests": {
+    "passed": 20,
+    "output": "20 passed in 3.73s",
+    "infrastructure": "Isolated PostgreSQL/pgvector and MinIO"
+  },
+  "live_smoke": {
+    "ok": true,
+    "variants": [
+      "jpeg",
+      "resize",
+      "crop",
+      "watermark"
+    ],
+    "exact_upload_deduplicated": true,
+    "unrelated_image_rejected": true,
+    "delete_removed_object_and_search_result": true,
+    "collection_id": "a8583101-fff0-487f-bf34-3e0a31284cae",
+    "image_id": "d4155a53-2075-4455-bee2-20bc90285da7"
+  },
+  "recovery": {
+    "ok": true,
+    "s3_upload_retry": true,
+    "worker_sigkill_recovered": true,
+    "attempts": 2,
+    "index_commits": 1,
+    "image_id": "85ba020e-08a3-4ffa-a0bc-4782a8b505e4"
+  },
+  "checks": {
+    "ruff_lint": "passed",
+    "ruff_format": "passed",
+    "uv_lock": "passed",
+    "docker_compose": "passed",
+    "seed_twice": "passed",
+    "runtime_without_test_dependencies": "passed",
+    "openapi_snapshot_matches_live": "passed"
+  }
+}
