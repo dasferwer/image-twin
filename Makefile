@@ -10,7 +10,7 @@ check:
 	uv run ruff format --check .
 	uv run ruff check .
 test:
-	docker compose --profile test build test
+	docker compose --profile test build test test-storage
 	docker compose --profile test run --rm test
 smoke:
 	docker compose exec -T api python scripts/smoke.py

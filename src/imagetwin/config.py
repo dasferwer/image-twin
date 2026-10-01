@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     worker_interval: float = Field(default=0.5, ge=0.05, le=60)
     lease_seconds: float = Field(default=20, ge=2, le=120)
     max_attempts: int = Field(default=3, ge=1, le=10)
+    cleanup_batch_size: int = Field(default=20, ge=1, le=100)
+    cleanup_lease_seconds: float = Field(default=120, ge=30, le=600)
+    cleanup_recheck_seconds: float = Field(default=300, ge=30, le=86400)
     inference_delay_seconds: float = Field(default=0, ge=0, le=30)
     model_dir: str = "models"
     s3_endpoint: str = "http://storage:9000"

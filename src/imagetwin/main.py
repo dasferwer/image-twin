@@ -9,6 +9,7 @@ from sqlalchemy import text
 
 from . import storage
 from .auth import User, current_user, router
+from .cleanup import cleanup_due, deletion_state
 from .config import settings
 from .db import engine
 from .observability import instrument
@@ -444,11 +445,26 @@ async def delete(image_id: UUID, user: User = Depends(current_user)):
         )
         if changed:
             await event(conn, image_id, "deleted")
-    removed = True
-    try:
-        await asyncio.to_thread(
-            storage.client().delete_object, Bucket=settings.s3_bucket, Key=row["object_key"]
+        await conn.execute(
+            text(
+                "INSERT INTO object_deletions(image_id,object_key) VALUES (:id,:key) "
+                "ON CONFLICT(image_id) DO NOTHING"
+            ),
+            {"id": image_id, "key": row["object_key"]},
         )
-    except Exception:
-        removed = False
-    return {"id": image_id, "status": "deleted", "object_removed": removed}
+    await cleanup_due(image_id)
+    async with engine.connect() as conn:
+        state = await deletion_state(conn, image_id)
+    return {
+        "id": image_id,
+        "status": "deleted",
+        "object_removed": state["status"] == "removed",
+        "cleanup": state,
+    }
+
+
+@app.get("/images/{image_id}/deletion", tags=["Images"])
+async def read_deletion(image_id: UUID, user: User = Depends(current_user)):
+    async with engine.connect() as conn:
+        await owned_image(conn, image_id, user, include_deleted=True)
+        return {"id": image_id, **await deletion_state(conn, image_id)}

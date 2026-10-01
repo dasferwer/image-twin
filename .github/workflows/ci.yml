@@ -8,7 +8,7 @@ jobs:
       - uses: astral-sh/setup-uv@v6
       - run: uv sync --extra dev --frozen
       - run: uv run ruff check . && uv run ruff format --check .
-      - run: docker compose --profile test build test
+      - run: docker compose --profile test build test test-storage
       - run: docker compose --profile test run --rm test
       - run: docker compose up --build -d --wait --wait-timeout 180
       - run: docker compose exec -T api python scripts/smoke.py

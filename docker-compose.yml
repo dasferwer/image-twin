@@ -9,6 +9,9 @@ x-app: &app
     AMQP_URL: amqp://imagetwin:imagetwin@rabbitmq:5672/
     JWT_SECRET: ${JWT_SECRET:-local-demo-imagetwin-replace-before-deployment}
     LEASE_SECONDS: ${LEASE_SECONDS:-20}
+    CLEANUP_BATCH_SIZE: ${CLEANUP_BATCH_SIZE:-20}
+    CLEANUP_LEASE_SECONDS: ${CLEANUP_LEASE_SECONDS:-120}
+    CLEANUP_RECHECK_SECONDS: ${CLEANUP_RECHECK_SECONDS:-300}
     INFERENCE_DELAY_SECONDS: ${INFERENCE_DELAY_SECONDS:-0}
     MODEL_DIR: /app/models
     S3_ENDPOINT: http://storage:9000
@@ -45,7 +48,9 @@ services:
       retries: 30
     restart: unless-stopped
   storage:
-    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    build:
+      context: .
+      dockerfile: Dockerfile.minio
     command: ["server", "/data"]
     environment:
       MINIO_ROOT_USER: imagetwin
@@ -59,7 +64,9 @@ services:
       retries: 30
     restart: unless-stopped
   test-storage:
-    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    build:
+      context: .
+      dockerfile: Dockerfile.minio
     profiles: ["test"]
     command: ["server", "/data"]
     environment:
@@ -117,6 +124,17 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "python", "scripts/worker_health.py", "indexer"]
+      interval: 5s
+      timeout: 5s
+      retries: 6
+  cleanup-worker:
+    <<: *app
+    command: ["python", "-m", "imagetwin.cleanup"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "scripts/worker_health.py", "cleanup"]
       interval: 5s
       timeout: 5s
       retries: 6
