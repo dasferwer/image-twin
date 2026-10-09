@@ -27,7 +27,7 @@ dev = [
 packages = ["src/imagetwin"]
 [tool.pytest.ini_options]
 addopts = "-q -o cache_dir=/tmp/pytest-cache"
-testpaths = ["tests"]
+testpaths = ["tests", "evaluation_tests"]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "session"
 asyncio_default_test_loop_scope = "session"

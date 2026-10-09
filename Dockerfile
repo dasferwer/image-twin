@@ -26,6 +26,8 @@ USER root
 RUN --mount=type=bind,from=builder,source=/wheels,target=/wheels pip install --no-index --find-links=/wheels "imagetwin[dev]"
 COPY pyproject.toml ./
 COPY tests ./tests
+COPY evaluation_tests ./evaluation_tests
+COPY docs/external ./docs/external
 COPY data ./data
 USER app
 CMD ["sh", "-c", "alembic upgrade head && pytest"]

@@ -1,0 +1,20 @@
+{
+  "dataset": "Fashion-MNIST test, Zalando SE (2017)",
+  "revision": "b2617bb6d3ffa2e429640350f613e3291e10b141",
+  "source": "https://github.com/zalandoresearch/fashion-mnist",
+  "license_statement": "https://github.com/zalandoresearch/fashion-mnist#license",
+  "license": "MIT in dataset publisher README; raw images remain external cache, no image redistribution",
+  "files": {
+    "t10k-images-idx3-ubyte.gz": "346e55b948d973a97e58d2351dde16a484bd415d4595297633bb08f03db6a073",
+    "t10k-labels-idx1-ubyte.gz": "67da17c76eaffca5446c3361aaab5c3cd6d1c2608764d35dfb1850b086bf8dd5"
+  },
+  "catalog_sizes_including_query": [50, 200, 500],
+  "positive_source_indices": [0,1,2,3,4,5,6,7,8,9],
+  "negative_source_indices": [500,501,502,503,504,505,506,507,508,509],
+  "catalog_rule": "first N-1 test images, plus one query row; no fitting or threshold changes",
+  "identity_labels": "same test index only; different images of same class are hard negatives; possible unknown natural duplicates not manually adjudicated",
+  "transformations": ["jpeg", "resize", "crop", "watermark"],
+  "positive_generation": "scripts/fixtures.py applied after bilinear upsampling native 28x28 grayscale to 224x224 RGB",
+  "separation": "new Zalando source family, no scikit-image calibration images; ImageNet pretraining identity overlap not auditable",
+  "frozen_before_run": "2026-10-09"
+}
